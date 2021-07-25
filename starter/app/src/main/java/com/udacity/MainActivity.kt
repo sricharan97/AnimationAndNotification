@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         //Using Kotlin android extensions library to avoid using findViewById method
         custom_button.setOnClickListener {
             if (::url.isInitialized) {
+                Toast.makeText(applicationContext, "button clicked", Toast.LENGTH_SHORT).show()
                 download()
             } else {
                 Toast.makeText(applicationContext, getString(R.string.download_toast), Toast.LENGTH_SHORT).show()
