@@ -1,13 +1,16 @@
+@file:Suppress("DEPRECATION")
+
 package com.udacity
 
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,7 +18,6 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import com.udacity.utils.sendNotification
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,30 +28,40 @@ class MainActivity : AppCompatActivity() {
     private var downloadID: Long = 0
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
     private lateinit var status: String
     private lateinit var downloadManager: DownloadManager
 
     private lateinit var url: String
     private lateinit var currentFileName: String
 
+
+    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-        createChannel(getString(R.string.download_channel_id), getString(R.string.download_channel_name))
+
+        //Create a notification channel
+        createChannel(CHANNEL_ID, getString(R.string.download_channel_name))
+
         notificationManager = getSystemService(NotificationManager::class.java) as NotificationManager
 
         //Using Kotlin android extensions library to avoid using findViewById method
         custom_button.setOnClickListener {
-            if (::url.isInitialized) {
-                Toast.makeText(applicationContext, "button clicked", Toast.LENGTH_SHORT).show()
-                download()
+            val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val isConnected = activeNetwork?.isConnectedOrConnecting == true
+            if (isConnected) {
+                if (::url.isInitialized) {
+                    custom_button.updateButtonState(ButtonState.Clicked)
+                    download()
+                } else {
+                    Toast.makeText(applicationContext, getString(R.string.download_toast), Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(applicationContext, getString(R.string.download_toast), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -145,6 +157,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //unregister the broadcast receiver
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(receiver)

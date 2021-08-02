@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/motion_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layoutDescription="@xml/motion_detail"
     tools:context=".DetailActivity"
     tools:showIn="@layout/activity_detail">
 
     <TextView
-        android:id="@+id/filename_label"
-        android:layout_width="wrap_content"
+        android:id="@+id/filename_text"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/filename_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barrier"
+        tools:text="Filename" />
+
+    <TextView
+        android:id="@+id/filename_label"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:text="@string/filename_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/filename_text"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/status_label"
@@ -26,47 +44,48 @@
         android:layout_height="wrap_content"
         android:text="@string/status_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/status_text"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filename_label"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/detail_button_margin"
-        android:layout_marginEnd="@dimen/detail_button_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/detail_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
-
-    <TextView
-        android:id="@+id/filename_text"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:gravity="center"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/filename_label"
-        app:layout_constraintTop_toTopOf="@+id/filename_label" />
+        app:layout_constraintVertical_bias="0.9"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="550dp" />
 
     <TextView
         android:id="@+id/status_text"
-        android:layout_width="262dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:gravity="center"
-        android:text="TextView"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/status_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/status_label"
-        app:layout_constraintTop_toTopOf="@+id/status_label" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@id/barrier"
+        tools:text="SUCCESS" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="filename_label,status_label"
+        tools:layout_editor_absoluteX="395dp"
+        tools:layout_editor_absoluteY="58dp" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

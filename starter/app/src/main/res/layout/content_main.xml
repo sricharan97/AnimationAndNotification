@@ -29,8 +29,7 @@
             android:paddingEnd="96dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_baseline_cloud_download_24"
-            tools:layout_editor_absoluteX="142dp"
-            tools:layout_editor_absoluteY="30dp" />
+            android:contentDescription="@string/main_image_description" />
 
     </FrameLayout>
 
@@ -84,6 +83,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
+        app:downloadTextColor="#000000"
+        app:viewColor="#03a9f4"
         tools:text="Download" />
 
 
