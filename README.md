@@ -25,7 +25,7 @@ A notification will be sent once the download is complete. When a user clicks on
 
   1. Utilizing **Notifications** API
   2. Building and using a **Custom view** with custom attributes
-  3. Animating view properties using **valueAnimator**
+  3. Animating view properties using **ValueAnimator**
   4. Coordinating animations in the entire layout using **MotionLayout**
   
 
