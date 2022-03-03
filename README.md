@@ -27,6 +27,14 @@ A notification will be sent once the download is complete. When a user clicks on
   2. Building and using a **Custom view** with custom attributes
   3. Animating view properties using **ValueAnimator**
   4. Coordinating animations in the entire layout using **MotionLayout**
+
+
+## Video Walkthrough
+
+**Click the below image to watch the navigation within the app**
+
+<a href="https://www.youtube.com/shorts/L9ZQmLaLI-s" target="_blank"><img src="/starter/LoadApp.jpg" 
+alt="Click to watch the video" width="150"  border="30" /></a>
   
 
 ## License
